@@ -1,0 +1,8 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+
+{% for u in all_users %}
+{{ u.username }}
+{% endfor %}
+{% endblock %}
