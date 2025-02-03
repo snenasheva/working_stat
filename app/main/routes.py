@@ -4,7 +4,7 @@ from .forms import LoginForm
 from app.models import User
 from flask_login import login_user, logout_user, current_user
 from app.manager.routes import manager_dashboard
-
+from app.decorators import admin_required
 
 @main_bp.route('/')
 def index():
@@ -30,11 +30,24 @@ def login():
     return render_template('login.html', form=form)
 
 
+ROLES_REDIRECTS = {
+    'Admin': 'admin.index',
+    'Manager': 'admin.index',
+    'Chief Department': 'chief.chief_dashboard'
+}
+
+
 def role_redirect():
-    if current_user.role == "Manager":
-        return redirect(url_for('manager.manager_dashboard'))
-    if current_user.role == "Chief":
-        return redirect(url_for('chief.chief_dashboard'))
+    endpoint = ROLES_REDIRECTS.get(current_user.role)
+    if endpoint:
+        return redirect(url_for(endpoint))
+    else:
+        flash(f'No dashboard available for the role: {current_user.role}', category='danger')
+        return redirect(url_for('main.index'))
+    #if current_user.role == "Manager":
+    #    return redirect(url_for('manager.manager_dashboard'))
+    #if current_user.role == "Chief":
+    #    return redirect(url_for('chief.chief_dashboard'))
 
 
 @main_bp.route('/logout')
@@ -42,3 +55,9 @@ def logout():
     logout_user()
     flash('You have been logged out', category='info')
     return redirect(url_for('main.index'))
+
+
+@main_bp.route('/dashboard_admin')
+@admin_required
+def dashboard_admin():
+    pass

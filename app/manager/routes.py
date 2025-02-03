@@ -9,7 +9,6 @@ def manager_dashboard():
     if current_user.role != 'Manager':
         flash('You need to log in')
         redirect(url_for('main.login'))
-
     return render_template('dashboard_manager.html')
 
 

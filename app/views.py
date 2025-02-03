@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from app import bcrypt
 from wtforms import SelectField, PasswordField
 from app.models import User, Employee
@@ -26,6 +26,12 @@ class CustomPageView(BaseView):
 
 
 class UserModelView(ModelView):  # what you see after clicking 'User' in the dashboard and rules for Create user form
+    def is_accessible(self):
+        return current_user.is_admin
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('main.index'))
+
     form_overrides = {'role': SelectField}
     form_extra_fields = {
         'password_hash': PasswordField('Password', render_kw={'autocomplete': 'new-password'})
@@ -48,27 +54,24 @@ class UserModelView(ModelView):  # what you see after clicking 'User' in the das
         super().on_model_change(form, model, is_created)
 
 
-class ManagerView(AdminIndexView):
-    def is_accessible(self):
-        return current_user.is_authenticated and current_user.role == 'Manager'
-
-    def inaccessible_callback(self, name, **kwargs):
-        # Redirect to login page or raise forbidden error
-        return redirect(url_for('main'))
-
-
-class EmployeeModelView(ModelView):
-    form_overrides = {'department': SelectField}
-    form_args = {
-        'department': {'choices': DEPARTMENTS, 'label': 'Choose department'}
-    }
-
-
 # to display some data on the page with AdminDashboard view:
 class DashBoardView(AdminIndexView):
     @expose('/')
     def add_db_data(self):
         all_users = User.query.all()  # feel free to change the function upon your needs
         return self.render('dashboard_index.html', all_users=all_users)
+
+
+class ManagerView(ModelView):
+    form_columns = ['employee']
+
+
+class EmployeeModelView(ModelView):  # what you see after clicking 'Employee' in the dashboard and rules for Create
+    # Employee form
+    form_overrides = {'department': SelectField}
+    form_args = {
+        'department': {'choices': DEPARTMENTS, 'label': 'Choose department'}
+    }
+
 
 

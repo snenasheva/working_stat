@@ -33,8 +33,8 @@ def create_app(config_name='development'):
     from app.main import main_bp
     app.register_blueprint(main_bp)
 
-    from app.manager import manager_bp
-    app.register_blueprint(manager_bp, url_prefix='/manager')
+    #from app.manager import manager_bp
+    #app.register_blueprint(manager_bp, url_prefix='/manager')
 
     from app.chief import chief_bp
     app.register_blueprint(chief_bp, url_prefix='/chief')
@@ -45,8 +45,6 @@ def create_app(config_name='development'):
     admin.add_view(UserModelView(User, db.session, endpoint='user'))
     admin.add_view(EmployeeModelView(Employee, db.session, 'employee'))
     admin.add_view(CustomPageView(name='Custom Page', endpoint='custom_page'))
-    # if current_user.role == 'Manager':
-    #    admin.add_view(ManagerView)
 
     return app
 
