@@ -4,7 +4,7 @@ from .forms import LoginForm
 from app.models import User
 from flask_login import login_user, logout_user, current_user
 from app.manager.routes import manager_dashboard
-from app.decorators import admin_required
+
 
 @main_bp.route('/')
 def index():
@@ -22,8 +22,9 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_login_psw(form.password.data):
             login_user(user)
+            print(f"Logged in user: {user.id}, Role: {user.role}")
             flash('You have been logged in', category='success')
-            return role_redirect()
+            return redirect(url_for('admin.index'))
         else:
             flash('Invalid name or password. Please, try again', category='danger')
 
@@ -58,6 +59,5 @@ def logout():
 
 
 @main_bp.route('/dashboard_admin')
-@admin_required
 def dashboard_admin():
-    pass
+    return render_template('dashboard_index.html')

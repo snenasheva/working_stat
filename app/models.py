@@ -20,11 +20,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     employees = db.relationship('Employee', backref='added_by', lazy=True)
 
-    def is_admin(self):
-        return self.role == 'Admin'
-
-    def is_manager(self):
-        return self.role == 'Manager'
+    def has_role(self, *roles):
+        return self.role in roles
 
     @property
     def password(self):

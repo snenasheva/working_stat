@@ -7,15 +7,15 @@ from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 
 ROLES = [
-        ('Admin', 'Admin'),
-        ('Manager', 'Manager'),
-        ('Chief Department', 'Chief Department'),
+    ('Admin', 'Admin'),
+    ('Manager', 'Manager'),
+    ('Chief Department', 'Chief Department'),
 ]
 
 DEPARTMENTS = [
-        ('Engineering', 'Engineering'),
-        ('Development', 'Development'),
-        ('Marketing', 'Marketing')
+    ('Engineering', 'Engineering'),
+    ('Development', 'Development'),
+    ('Marketing', 'Marketing')
 ]
 
 
@@ -27,7 +27,7 @@ class CustomPageView(BaseView):
 
 class UserModelView(ModelView):  # what you see after clicking 'User' in the dashboard and rules for Create user form
     def is_accessible(self):
-        return current_user.is_admin
+        return current_user.is_authenticated and current_user.has_role("Admin")
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('main.index'))
@@ -66,12 +66,9 @@ class ManagerView(ModelView):
     form_columns = ['employee']
 
 
-class EmployeeModelView(ModelView):  # what you see after clicking 'Employee' in the dashboard and rules for Create
-    # Employee form
+# what you see after clicking 'Employee' in the dashboard and rules for Create Employee form:
+class EmployeeModelView(ModelView):
     form_overrides = {'department': SelectField}
     form_args = {
         'department': {'choices': DEPARTMENTS, 'label': 'Choose department'}
     }
-
-
-
