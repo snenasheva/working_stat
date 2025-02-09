@@ -12,6 +12,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password_hash = db.Column(db.String(50), nullable=False)
@@ -57,15 +58,15 @@ class Employee(db.Model):
     __tablename__ = 'employee'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    surname = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
     country = db.Column(db.String(50), nullable=False)
     office = db.Column(db.String(50), nullable=False)
     department = db.Column(db.String(50), nullable=False)
     exception = db.Column(db.Boolean, default=False)
     hours_month = db.Column(db.Integer)
     office_visits = db.Column(db.Integer)
-    added_by_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    added_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'{self.name} {self.surname}'
+        return f'{self.name} {self.last_name}'

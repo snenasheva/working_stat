@@ -43,8 +43,9 @@ def create_app(config_name='development'):
 
     admin = Admin(app, name='Working Statistics', template_mode='bootstrap4', index_view=DashBoardView())
     admin.add_view(UserModelView(User, db.session, endpoint='user'))
-    admin.add_view(EmployeeModelView(Employee, db.session, 'employee'))
+    admin.add_view(EmployeeModelView(Employee, db.session, endpoint='employee'))
     admin.add_view(CustomPageView(name='Custom Page', endpoint='custom_page'))
+    #admin.add_view(ImportEmployeesView(name='Bulk import', endpoint='import'))
 
     return app
 
