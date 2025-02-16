@@ -39,13 +39,13 @@ def create_app(config_name='development'):
     from app.chief import chief_bp
     app.register_blueprint(chief_bp, url_prefix='/chief')
 
-    from app.views import UserModelView, CustomPageView, DashBoardView, ManagerView, EmployeeModelView
+    from app.views import UserModelView, CustomPageView, DashBoardView, EmployeeModelView, PlotView
 
     admin = Admin(app, name='Working Statistics', template_mode='bootstrap4', index_view=DashBoardView())
     admin.add_view(UserModelView(User, db.session, endpoint='user'))
     admin.add_view(EmployeeModelView(Employee, db.session, endpoint='employee'))
     admin.add_view(CustomPageView(name='Custom Page', endpoint='custom_page'))
-    #admin.add_view(ImportEmployeesView(name='Bulk import', endpoint='import'))
+    admin.add_view(PlotView(name='Country/Hours', endpoint='plot_view'))
 
     return app
 

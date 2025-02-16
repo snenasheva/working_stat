@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, session
+from flask import render_template, flash, redirect, url_for, Response
 from . import main_bp
 from .forms import LoginForm
 from app.models import User, Employee
@@ -80,7 +80,7 @@ def bulk_import():
             last_name=entry['last_name'],
             country=entry['country'],
             office=entry['office'],
-            department='India',
+            department='Engineering',
             exception=False,
             hours_month=entry['hours/month'],
             office_visits=entry['office visits'],
@@ -97,3 +97,7 @@ def bulk_import():
             print(f'Error importing employees: {e}')
 
     flash('The import finished successfully')
+    return redirect(url_for('admin.index'))
+
+
+

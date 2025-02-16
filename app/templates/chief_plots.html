@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center flex-column">
+    <h2 class="mb-3">Working Hours by Country</h2>
+    <a href="{{ url_for('plot_view.country_hours') }}" target="_blank">
+        <button class="btn btn-primary">View Chart</button>
+    </a>
+</div>
+
+{% endblock %}
