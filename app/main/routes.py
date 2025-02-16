@@ -1,11 +1,10 @@
 from flask import render_template, flash, redirect, url_for, Response
-from . import main_bp
+from app.main import main_bp
 from .forms import LoginForm
 from app.models import User, Employee
 from flask_login import login_user, logout_user, current_user
 import json
 from datetime import datetime
-from app.manager.routes import manager_dashboard
 from app import db
 
 
