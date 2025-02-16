@@ -33,9 +33,6 @@ def create_app(config_name='development'):
     from app.main import main_bp
     app.register_blueprint(main_bp)
 
-    #from app.manager import manager_bp
-    #app.register_blueprint(manager_bp, url_prefix='/manager')
-
     from app.chief import chief_bp
     app.register_blueprint(chief_bp, url_prefix='/chief')
 
