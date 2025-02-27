@@ -16,6 +16,7 @@ class Config:
     MAIL_USERNAME = os.environ.get('EMAIL_USER')
     MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
     ADMINS = ['admin email here']
+    FLASK_ADMIN_FLUID_LAYOUT = True
     # Add any other configurations you need
 
 

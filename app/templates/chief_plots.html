@@ -1,11 +1,53 @@
 {% extends 'index.html' %}
 
-{% block content %}
-<div class="d-flex justify-content-center align-items-center flex-column">
-    <h2 class="mb-3">Working Hours by Country</h2>
-    <a href="{{ url_for('plot_view.country_hours') }}" target="_blank">
-        <button class="btn btn-primary">View Chart</button>
-    </a>
-</div>
+<style>
+    .plot-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        padding: 10px;
+    }
 
+    .plot-block h2 {
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+
+{% block content %}
+<div class="container-fluid mt-2 mb-5">
+    <div class="row align-items-stretch">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-6 mt-2 d-flex flex-column text-center plot-block">
+            <h2>Working Hours by Country</h2>
+            <div class="d-flex flex-row justify-content-center mt-auto">
+                <a href="{{ url_for('plot_view.country_hours') }}" target="_blank">
+                  <button class="btn btn-primary">View Chart</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-6 mt-2 d-flex flex-column text-center plot-block">
+            <h2>Office Visits by Country</h2>
+            <div class="d-flex flex-row justify-content-center mt-auto">
+                <a href="{{ url_for('plot_view.country_office_visits') }}" target="_blank">
+                  <button class="btn btn-primary">View Chart</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-6 mt-2 d-flex flex-column text-center plot-block">
+            <h2>Office Visits by Office</h2>
+            <div class="d-flex flex-row justify-content-center mt-auto">
+                <a href="{{ url_for('plot_view.visits_per_office')}}" target="_blank">
+                  <button class="btn btn-primary">View Chart</button>
+                </a>
+              </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

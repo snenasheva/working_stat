@@ -18,8 +18,9 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(50), nullable=False)
     role = db.Column(db.String, nullable=False)  # Admin, Manager, etc.
     email = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    department = db.Column(db.String(50), nullable=False)
     employees = db.relationship('Employee', backref='added_by', lazy=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def has_role(self, *roles):
         return self.role in roles

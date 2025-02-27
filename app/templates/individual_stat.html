@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <h2>{{ "{} {}".format(employee.name, employee.last_name) }} statistics</h2>
+    <br>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>last name</th>
+                <th>country</th>
+                <th>office</th>
+                <th>department</th>
+                <th>exception</th>
+                <th>hours/month</th>
+                <th>office visits</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.last_name }}</td>
+            <td>{{ employee.country }}</td>
+            <td>{{ employee.office }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ "Yes" if employee.exception else "No" }}</td>
+            <td>{{ employee.hours_month }}</td>
+            <td>{{ employee.office_visits }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

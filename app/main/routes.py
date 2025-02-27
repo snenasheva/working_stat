@@ -17,7 +17,7 @@ def index():
 def login():
     if current_user.is_authenticated:
         flash('You are already logged in', category='info')
-        return role_redirect()
+        return redirect(url_for('admin.index'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -37,19 +37,6 @@ ROLES_REDIRECTS = {
     'Manager': 'admin.index',
     'Chief Department': 'chief.chief_dashboard'
 }
-
-
-def role_redirect():
-    endpoint = ROLES_REDIRECTS.get(current_user.role)
-    if endpoint:
-        return redirect(url_for(endpoint))
-    else:
-        flash(f'No dashboard available for the role: {current_user.role}', category='danger')
-        return redirect(url_for('main.index'))
-    #if current_user.role == "Manager":
-    #    return redirect(url_for('manager.manager_dashboard'))
-    #if current_user.role == "Chief":
-    #    return redirect(url_for('chief.chief_dashboard'))
 
 
 @main_bp.route('/logout')
