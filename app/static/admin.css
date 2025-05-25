@@ -1,0 +1,7 @@
+.navbar.navbar-dark {
+    width: 100vw !important;
+    max-width: 100% !important;
+}
+.container-fluid {
+    max-width: 100% !important;
+}

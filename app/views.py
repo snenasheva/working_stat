@@ -25,7 +25,8 @@ DEPARTMENTS = [
     ('Petah Tikva Engineering', 'Petah Tikva Engineering'),
     ('Petah Tikva Development', 'Petah Tikva Development'),
     ('Petah Tikva Marketing', 'Petah Tikva Marketing'),
-    ('Jaipur Development', 'Jaipur Development')
+    ('Jaipur Development', 'Jaipur Development'),
+    ('Makao Development', 'Makao Development')
 ]
 
 
@@ -148,3 +149,8 @@ class LocalManagerView(ModelView):
 
     form_excluded_columns = ['added_by']
 
+
+class NavbarPageView(BaseView):
+    @expose('/')
+    def navbar(self):
+        return render_template('navbar.html')
