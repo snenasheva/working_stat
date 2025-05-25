@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<style>
+    .dashboard-header {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        font-weight: 600;
+    }
+
+    .card-plot {
+        border: none;
+        border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .card-plot:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        color: #6c757d;
+    }
+
+    .view-btn {
+        margin-top: auto;
+    }
+</style>
+
+<div class="container py-5">
+    <h2 class="dashboard-header">📊 Team Insights Dashboard</h2>
+    <div class="row">
+        <!-- Chart 1 -->
+        <div class="col-xl-4 col-md-6 mb-4 d-flex">
+            <div class="card card-plot w-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Working Hours by Country</h5>
+                    <p class="card-text">Compare monthly working hours across countries.</p>
+                    <a href="{{ url_for('plot_view.country_hours') }}" target="_blank" class="btn btn-outline-primary mt-auto view-btn">View Chart</a>
+                </div>
+            </div>
+        </div>
+        <!-- Chart 2 -->
+        <div class="col-xl-4 col-md-6 mb-4 d-flex">
+            <div class="card card-plot w-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Office Visits by Country</h5>
+                    <p class="card-text">Explore how often employees visit offices in each country.</p>
+                    <a href="{{ url_for('plot_view.country_office_visits') }}" target="_blank" class="btn btn-outline-success mt-auto view-btn">View Chart</a>
+                </div>
+            </div>
+        </div>
+        <!-- Chart 3 -->
+        <div class="col-xl-4 col-md-6 mb-4 d-flex">
+            <div class="card card-plot w-100 text-center shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Office Visits by Office</h5>
+                    <p class="card-text">See the frequency of visits per office location.</p>
+                    <a href="{{ url_for('plot_view.visits_per_office') }}" target="_blank" class="btn btn-outline-info mt-auto view-btn">View Chart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
