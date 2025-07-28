@@ -2,6 +2,7 @@
 
 This is a full-stack Flask application for managing employee data, analyzing work statistics, and supporting multi-role access (Admin, Manager, etc.).
 It includes a visual admin interface, secure authentication, and dynamic chart rendering with Seaborn and Matplotlib.
+The app also supports importing employee data from external systems (CSV/JSON), automatically saving it into a relational database, and visualizing trends through interactive dashboards.
 
 ## Features
 
