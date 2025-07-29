@@ -37,7 +37,7 @@ def create_app(config_name='development'):
     app.register_blueprint(chief_bp, url_prefix='/chief')
 
     from app.views import UserModelView, CustomPageView, DashBoardView, EmployeeModelView, LocalManagerView, NavbarPageView
-    from mpl_view import PlotView
+    from app.mpl_view import PlotView
 
     admin = Admin(app, name='Working Statistics', template_mode='bootstrap4', index_view=DashBoardView())
     admin.add_view(UserModelView(User, db.session, endpoint='user'))
