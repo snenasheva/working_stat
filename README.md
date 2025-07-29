@@ -39,12 +39,29 @@ The app also supports importing employee data from external systems (CSV/JSON), 
 ## Running Locally
 
 ### With Docker
+1. Clone the repository
+```
+bash
+git clone https://github.com/your-username/working_stat.git
+cd working_stat
+```
+2. Build the Docker image
 
 ```
 docker build -t working-stats-dashboard .
+```
+
+3. Run the container
+
+```
 docker run -p 5000:5000 working-stats-dashboard
 ```
 
+4. Access the up
+
+Open your browser and go to http://localhost:5000
+
+   
 ### Manual Setup
 
 1. Clone the repo and create a virtual environment
