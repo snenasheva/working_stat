@@ -27,7 +27,7 @@ The app also supports importing employee data from external systems (CSV/JSON), 
 
 - Frontend: Flask-Admin (Bootstrap4 UI)
 
-- Database: SQLite (default) – easily swappable with PostgreSQL/MySQL
+- Database: SQLite
 
 - Visualization: Seaborn, Matplotlib
 
@@ -41,8 +41,8 @@ The app also supports importing employee data from external systems (CSV/JSON), 
 ### With Docker
 
 ```
-docker build -t working-stats .
-docker run -p 5000:5000 working-stats
+docker build -t working-stats-dashboard .
+docker run -p 5000:5000 working-stats-dashboard
 ```
 
 ### Manual Setup
