@@ -26,3 +26,20 @@ jobs:
           sleep 5
           curl --fail http://localhost:5000 || (docker logs test-app && exit 1)
 
+      - name: Wait for the Flask app to start
+        run: |
+          for i in {1..10}; do
+            if curl --silent http://localhost:5000/ > /dev/null; then
+              echo "Server is up!"
+              exit 0
+            else
+              echo "Waiting for server... ($i)"
+              sleep 3
+            fi
+          done
+          echo "Server did not respond in time."
+          docker logs test-app  # Show logs on failure
+          exit 1
+          
+          
+
