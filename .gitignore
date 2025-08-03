@@ -10,7 +10,7 @@ env/
 
 instance/
 
-migrations/__pycache__/
+migrations/
 
 .idea/
 .vscode/
