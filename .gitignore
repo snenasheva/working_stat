@@ -12,6 +12,7 @@ instance/
 
 migrations/
 migrations/__pycache__/
+/migrations-backup/
 
 .idea/
 .vscode/
@@ -26,4 +27,4 @@ Thumbs.db
 *.egg-info/
 dist/
 build/
-/migrations-backup/
+
